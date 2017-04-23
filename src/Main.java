@@ -35,16 +35,22 @@ public class Main {
 
         long counter = 0;
         long startTime = System.currentTimeMillis();
+        int previousResult = 0;
         while(i < targetNumber) {
-            int result = generateRandomNumbersInRange(1, 20);
             counter++;
+
+            int result = generateRandomNumbersInRange(1, 20);
+            if(result == previousResult) {
+                continue; // skip to top of while loop
+            } else {
+                previousResult = result;
+            }
 
             for(int k = 0; k < distribution.length; k++) {
                 int[] distTracker = distributionContainer.get(result);
                 if(distTracker[1] < distTracker[0]) {
                     distTracker[1]++;
                     i++;
-                    break;
                 }
                 break;
             }
